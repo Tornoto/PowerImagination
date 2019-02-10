@@ -1,31 +1,80 @@
-// Learn TypeScript:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+class Notification_class {
+    _eventMap: Map<number, Array<any>> = new Map<number, Array<any>>();
+    _eventTarget: Map<any, Array<any>> = new Map<any, Array<any>>();
 
-    @property(cc.Label)
-    label: cc.Label = null;
+    on(type, callback, target){
+        if(this._eventMap[type] == undefined){
+            this._eventMap[type] = [];
+        }
 
-    @property
-    text: string = 'hello';
+        this._eventMap[type].push({callback: callback, target: target});
 
-    // LIFE-CYCLE CALLBACKS:
+        if(target.uid == null){
+            if(target.name != null){
+                target.uid = target.name + "-" + Math.round(Math.random()*1000000);
+            }else{
+                target.uid = "MGR-" + Math.round(Math.random()*1000000);
+            }
+        }
 
-    // onLoad () {}
-
-    start () {
-
+        var objId = target.uid;
+        if(this._eventTarget[objId] == undefined){
+            this._eventTarget[objId] = [];
+        }
+        this._eventTarget[objId].push({type: type, callback: callback});
     }
 
-    // update (dt) {}
+    emit(type, param){
+        let array = this._eventMap[type];
+        if(array == undefined){
+            return;
+        }
+
+        for(let i=0; i<array.length; ++i){
+            let element = array[i];
+            if(element != null){
+                element.callback.call(element.target, param);
+            }
+        }
+    }
+
+    off(type, callback){
+        var array = this._eventMap[type];
+        if(array == undefined){
+            return;
+        }
+        for(let i=0; i<array.length; ++i){
+            let element = array[i];
+            if(element && element.callback == callback){
+                array.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    offType(type){
+        delete this._eventMap[type];
+    }
+
+    offAll(target){
+        var objId = target.uid;
+        var array = this._eventTarget[objId];
+        
+        if(array == undefined){
+            return;
+        }
+
+        for(let i=0; i<array.length; ++i){
+            var element = array[i];
+            if(element != null){
+                this.off(element.type, element.callback);
+            }
+        }
+        delete this._eventTarget[objId];
+    }
 }
+
+export var NotificationMgr = new Notification_class();
