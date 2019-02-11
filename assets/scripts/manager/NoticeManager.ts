@@ -6,12 +6,12 @@ class Notification_class {
     _eventTarget: Map<any, Array<any>> = new Map<any, Array<any>>();
 
     on(type, callback, target){
-        if(this._eventMap[type] == undefined){
-            this._eventMap[type] = [];
+        if(this._eventMap.get(type) == undefined){
+            this._eventMap.set(type, []);
         }
-
-        this._eventMap[type].push({callback: callback, target: target});
-
+        
+        this._eventMap.get(type).push({callback: callback, target: target});
+        
         if(target.uid == null){
             if(target.name != null){
                 target.uid = target.name + "-" + Math.round(Math.random()*1000000);
@@ -21,14 +21,15 @@ class Notification_class {
         }
 
         var objId = target.uid;
-        if(this._eventTarget[objId] == undefined){
-            this._eventTarget[objId] = [];
+        if(this._eventTarget.get(objId) == undefined){
+            this._eventTarget.set(objId, []);
         }
-        this._eventTarget[objId].push({type: type, callback: callback});
+
+        this._eventTarget.get(objId).push({type: type, callback: callback});
     }
 
     emit(type, param){
-        let array = this._eventMap[type];
+        let array = this._eventMap.get(type);
         if(array == undefined){
             return;
         }
@@ -42,7 +43,7 @@ class Notification_class {
     }
 
     off(type, callback){
-        var array = this._eventMap[type];
+        var array = this._eventMap.get(type);
         if(array == undefined){
             return;
         }
@@ -56,12 +57,12 @@ class Notification_class {
     }
 
     offType(type){
-        delete this._eventMap[type];
+        this._eventMap.delete(type);
     }
 
     offAll(target){
         var objId = target.uid;
-        var array = this._eventTarget[objId];
+        var array = this._eventTarget.get(objId);
         
         if(array == undefined){
             return;
@@ -73,7 +74,7 @@ class Notification_class {
                 this.off(element.type, element.callback);
             }
         }
-        delete this._eventTarget[objId];
+        this._eventTarget.delete(objId);
     }
 }
 
