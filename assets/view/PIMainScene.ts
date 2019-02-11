@@ -1,5 +1,6 @@
 import { NotificationMgr } from "../scripts/manager/NoticeManager";
 import { MsgCode } from "../scripts/model/MessageCode";
+import { HUD } from "../scripts/manager/HUD";
 
 const {ccclass, property} = cc._decorator;
 
@@ -11,6 +12,9 @@ export default class NewClass extends cc.Component {
 
     @property
     text: string = 'hello';
+
+    @property(cc.Prefab)
+    pfMessage: cc.Prefab = null;
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -31,6 +35,10 @@ export default class NewClass extends cc.Component {
 
     onDestroy(){
         NotificationMgr.offAll(this);
+    }
+
+    onMessage(){
+        HUD.showLayer(this.pfMessage);
     }
 
     // update (dt) {}
