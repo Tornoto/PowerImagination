@@ -1,3 +1,5 @@
+import { HUD } from "./HUD";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -69,6 +71,7 @@ export default class CfgMgr_class{
             count++;
             if(self.index == 0){
                 cc.log("all configure files loaded !");
+                HUD.goToScene("PIMainScene");
             }
         });
     }

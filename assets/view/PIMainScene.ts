@@ -1,6 +1,7 @@
 import { NotificationMgr } from "../scripts/manager/NoticeManager";
 import { MsgCode } from "../scripts/model/MessageCode";
 import { HUD } from "../scripts/manager/HUD";
+import ROOT_Layer from "./ROOT_Layer";
 
 const {ccclass, property} = cc._decorator;
 
@@ -31,6 +32,9 @@ export default class NewClass extends cc.Component {
 
     greeting(){
         this.label.string = "Good Night !";
+        // test persist root node
+        let comp = cc.find("root_layer").getComponent(ROOT_Layer);
+        cc.log("data: " + comp.data);
     }
 
     onDestroy(){
