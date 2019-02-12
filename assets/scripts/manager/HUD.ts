@@ -12,12 +12,13 @@ export default class HUD_class {
 
     showLayer(pf: cc.Prefab, parent: cc.Node = null){
         if(pf == null){
-            cc.error("pf cannot be null !");
+            cc.log("pf cannot be null !");
             return null;
         }
         let layer = cc.instantiate(pf);
         if(layer == null){
-            cc.error("cannot instantiate " + pf);
+            cc.warn("cannot instantiate " + pf);
+            return null;
         }
         if(parent){
             parent.addChild(layer);
@@ -35,6 +36,11 @@ export default class HUD_class {
             pf.node.destroy();
         }
     }
+
+    goToScene(sceneName: string){
+        cc.director.loadScene(sceneName);
+    }
 }
 
 export var HUD = new HUD_class(); 
+(window as any).HUD = HUD;
