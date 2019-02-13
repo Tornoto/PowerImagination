@@ -1,7 +1,7 @@
 import { NotificationMgr } from "../scripts/manager/NoticeManager";
 import { MsgCode } from "../scripts/model/MessageCode";
 import { HUD } from "../scripts/manager/HUD";
-import ROOT_Layer from "./ROOT_Layer";
+import ROOT_Layer from "./HUD_ROOT";
 
 const {ccclass, property} = cc._decorator;
 
