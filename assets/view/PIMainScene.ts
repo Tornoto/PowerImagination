@@ -6,7 +6,7 @@ import ROOT_Layer from "./HUD_ROOT";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class PIMainScene extends cc.Component {
 
     @property(cc.Label)
     label: cc.Label = null;
@@ -32,9 +32,6 @@ export default class NewClass extends cc.Component {
 
     greeting(){
         this.label.string = "Good Night !";
-        // test persist root node
-        let comp = cc.find("root_layer").getComponent(ROOT_Layer);
-        cc.log("data: " + comp.data);
     }
 
     onDestroy(){

@@ -129,9 +129,8 @@
       "__id__": 2
     },
     "_enabled": true,
-    "label": null,
-    "text": "hello",
-    "_id": "85kpcewxNHA5tUySeDQlQd"
+    "pfLoading": null,
+    "_id": "f78RZpb1RNwZFebELDf395"
   },
   {
     "__type__": "cc.Node",
