@@ -7,7 +7,7 @@ export default class HUD_ROOT extends cc.Component {
 
     @property(cc.Prefab)
     pfLoading: cc.Prefab = null;
-
+    d = 1;
     onLoad() {
         // add global variable
         // (window as any).Mgr = Mgr;
@@ -17,7 +17,7 @@ export default class HUD_ROOT extends cc.Component {
 
     start() {
     }
-    
+
     _dt: number = 0;
     update(dt) {
         this._dt += dt;

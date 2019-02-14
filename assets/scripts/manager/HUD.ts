@@ -1,3 +1,5 @@
+import { ROOT_Layer } from "../../view/HUD_ROOT";
+import LoadingLayer from "../../view/common/LoadingLayer";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -39,6 +41,24 @@ export default class HUD_class {
 
     goToScene(sceneName: string){
         cc.director.loadScene(sceneName);
+    }
+
+    goToSceneWithLoading(sceneName:string){
+        let layer = ROOT_Layer.node.getChildByName("loading");
+        if(layer == null){
+            layer = HUD.showLayer(ROOT_Layer.pfLoading, ROOT_Layer.node);
+            layer.name = "loading";
+            layer.zIndex = cc.macro.MAX_ZINDEX - 10;
+        }
+        var loading = layer.getComponent(LoadingLayer);
+        loading.goToScene(sceneName);
+
+        cc.director.preloadScene(sceneName, (count, total, item)=>{
+            loading.onProgress(count, total, item);
+        }, 
+        (err)=>{
+            loading.loadFinish(err);
+        });
     }
 }
 

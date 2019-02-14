@@ -71,7 +71,7 @@ export default class CfgMgr_class{
             count++;
             if(self.index == 0){
                 cc.log("all configure files loaded !");
-                HUD.goToScene("PIMainScene");
+                HUD.goToSceneWithLoading("PIMainScene");
             }
         });
     }
