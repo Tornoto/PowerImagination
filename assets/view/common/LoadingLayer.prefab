@@ -519,6 +519,9 @@
       "__id__": 1
     },
     "_enabled": true,
+    "bgNode": {
+      "__id__": 2
+    },
     "pbLoading": {
       "__id__": 13
     },

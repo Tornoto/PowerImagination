@@ -48,7 +48,8 @@ export default class HUD_class {
         if(layer == null){
             layer = HUD.showLayer(ROOT_Layer.pfLoading, ROOT_Layer.node);
             layer.name = "loading";
-            layer.zIndex = cc.macro.MAX_ZINDEX - 10;
+            layer.zIndex = cc.macro.MIN_ZINDEX + 10;
+            layer.getComponent(LoadingLayer).bgImgAdaptation();  //背景图片适配
         }
         var loading = layer.getComponent(LoadingLayer);
         loading.goToScene(sceneName);
