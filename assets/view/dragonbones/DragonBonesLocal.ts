@@ -3,12 +3,23 @@ const {ccclass, property} = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
 
+    @property(dragonBones.ArmatureDisplay)
+    dbMonster0: dragonBones.ArmatureDisplay = null;
+    _arm0:dragonBones.Armature = null;;
+
+    @property(dragonBones.ArmatureDisplay)
+    dbMonster1: dragonBones.ArmatureDisplay = null;
+    _arm1: dragonBones.Armature = null;
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {}
+    onLoad () {
+        this._arm0 = this.dbMonster0.armature();
+        this._arm1 = this.dbMonster1.armature();
+    }
 
     start () {
-        // this.onLoadDragonBone(); // 似乎龙骨版本有问题
+        // do nothing 
+        // ignore this ts code file
     }
 
     onLoadDragonBone(){
