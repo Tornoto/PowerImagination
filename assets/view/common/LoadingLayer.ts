@@ -3,10 +3,10 @@ import { HUD } from "../../scripts/manager/HUD";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class LoadingLayer extends cc.Component {
 
     @property(cc.Node)
-    bgNode: cc.Node;
+    bgNode: cc.Node = null;
 
     @property(cc.ProgressBar)
     pbLoading: cc.ProgressBar = null;
