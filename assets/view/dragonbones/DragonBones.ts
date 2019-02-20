@@ -11,8 +11,8 @@ export default class DragonBones extends cc.Component {
 
     bLoaded:boolean = false;
 
-    res = [["bones/monster/monsterbone001_0_ske","bones/monster/monsterbone001_0_tex"],
-            ["bones/monster/monsterbone001_1_ske","bones/monster/monsterbone001_1_tex"]];
+    res = [["bones/monster/m1/monsterbone001_0_ske","bones/monster/m1/monsterbone001_0_tex"],
+            ["bones/monster/m2/monsterbone001_1_ske","bones/monster/m2/monsterbone001_1_tex"]];
     idx = 1;
 
     start () {
@@ -25,8 +25,8 @@ export default class DragonBones extends cc.Component {
 
     loadDragonBones(){
         let idx = this.idx++%2;
+        
         let data = this.dbMonster.armature().clock;
-
         cc.loader.loadRes(this.res[idx][0], dragonBones.DragonBonesAsset, (err, res)=>{
             cc.loader.loadRes(this.res[idx][1], dragonBones.DragonBonesAtlasAsset, (err2, res2)=>{
                 this.dbMonster.dragonAsset = res;
