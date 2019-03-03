@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class NewClass extends cc.Component {
+export default class ScrollingScene extends cc.Component {
 
     @property(cc.Node)
     nBg1: cc.Node = null;
